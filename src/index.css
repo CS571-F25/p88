@@ -24,10 +24,34 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  background-image: linear-gradient(
+    -135deg,
+    transparent 0%, transparent 3%,
+    #a03030 3%, #a03030 5%,
+    transparent 5%, transparent 8%,
+    #a03030 8%, #a03030 10%,
+    transparent 10%, transparent 13%,
+    #a03030 13%, #a03030 15%,
+    transparent 15%, transparent 18%,
+    rgba(160, 48, 48, 0.7) 18%, rgba(160, 48, 48, 0.7) 20%,
+    transparent 20%, transparent 23%,
+    rgba(160, 48, 48, 0.55) 23%, rgba(160, 48, 48, 0.55) 25%,
+    transparent 25%, transparent 28%,
+    rgba(160, 48, 48, 0.4) 28%, rgba(160, 48, 48, 0.4) 30%,
+    transparent 30%, transparent 33%,
+    rgba(160, 48, 48, 0.25) 33%, rgba(160, 48, 48, 0.25) 35%,
+    transparent 35%, transparent 38%,
+    rgba(160, 48, 48, 0.15) 38%, rgba(160, 48, 48, 0.15) 40%,
+    transparent 40%, transparent 43%,
+    rgba(160, 48, 48, 0.08) 43%, rgba(160, 48, 48, 0.08) 45%,
+    transparent 45%
+  );
+  background-position: top right;
+  background-repeat: no-repeat;
+  background-size: 800px 800px;
+  background-attachment: fixed;
+  background-color: #2a2a2a;
 }
 
 h1 {
@@ -55,14 +79,42 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
   a:hover {
     color: #747bff;
   }
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* High-specificity override to ensure dark background (overrides Bootstrap or inline styles) */
+html, body, #root {
+  background-color: #2a2a2a !important;
+  color: rgba(255, 255, 255, 0.87) !important;
+  background-image: linear-gradient(
+    -135deg,
+    transparent 0%, transparent 3%,
+    #a03030 3%, #a03030 5%,
+    transparent 5%, transparent 8%,
+    #a03030 8%, #a03030 10%,
+    transparent 10%, transparent 13%,
+    #a03030 13%, #a03030 15%,
+    transparent 15%, transparent 18%,
+    rgba(160, 48, 48, 0.7) 18%, rgba(160, 48, 48, 0.7) 20%,
+    transparent 20%, transparent 23%,
+    rgba(160, 48, 48, 0.55) 23%, rgba(160, 48, 48, 0.55) 25%,
+    transparent 25%, transparent 28%,
+    rgba(160, 48, 48, 0.4) 28%, rgba(160, 48, 48, 0.4) 30%,
+    transparent 30%, transparent 33%,
+    rgba(160, 48, 48, 0.25) 33%, rgba(160, 48, 48, 0.25) 35%,
+    transparent 35%, transparent 38%,
+    rgba(160, 48, 48, 0.15) 38%, rgba(160, 48, 48, 0.15) 40%,
+    transparent 40%, transparent 43%,
+    rgba(160, 48, 48, 0.08) 43%, rgba(160, 48, 48, 0.08) 45%,
+    transparent 45%
+  ) !important;
+  background-position: top right !important;
+  background-repeat: no-repeat !important;
+  background-size: 800px 800px !important;
+  background-attachment: fixed !important;
 }

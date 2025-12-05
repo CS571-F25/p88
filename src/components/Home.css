@@ -1,0 +1,5 @@
+.home-content-wrapper {
+    /* Pull the content up by counteracting the global padding and margin */
+    margin-top: -56px;
+    padding: 20px; /* Add some internal padding for aesthetics */
+}

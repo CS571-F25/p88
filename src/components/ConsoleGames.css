@@ -1,0 +1,53 @@
+.console-games-container {
+  padding: 20px 0;
+}
+
+.console-title {
+  font-size: 2.5em;
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 3px solid #a03030;
+  padding-bottom: 15px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  gap: 25px;
+}
+
+.loading-message,
+.no-games-message {
+  font-size: 1.1em;
+  color: #b0b0b0;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.error-message {
+  font-size: 1.1em;
+  color: #ff6b6b;
+  text-align: center;
+  padding: 40px 20px;
+  background-color: rgba(255, 107, 107, 0.1);
+  border-radius: 8px;
+  border: 1px solid #ff6b6b;
+}
+
+@media (max-width: 1024px) {
+  .games-grid {
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .console-title {
+    font-size: 1.8em;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+}

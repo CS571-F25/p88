@@ -1,9 +1,10 @@
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import Home from './Home'
+import Home from './Home';
 import About from './About'
 import GameIndexNavbar from './GameIndexNavbar'
 import ConsoleGames from './ConsoleGames'
 import GameDetails from './GameDetails'
+import '../App.css';
 
 function App() {
   return (

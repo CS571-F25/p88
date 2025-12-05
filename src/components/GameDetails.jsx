@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Comments from './Comments';
+import './GameDetails.css';
 
 function GameDetails() {
   const { id } = useParams();
   const [game, setGame] = useState(null);
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -26,19 +30,60 @@ function GameDetails() {
       });
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p style={{color: 'red'}}>Error: {error}</p>;
-  if (!game) return <p>Game not found.</p>;
+  if (loading) return <p className="gd-loading">Loading...</p>;
+  if (error) return <p className="gd-error">Error: {error}</p>;
+  if (!game) return <p className="gd-notfound">Game not found.</p>;
 
   return (
-    <div>
-      <h2>{game.name}</h2>
-      <img src={game.background_image} alt={game.name} style={{maxWidth: '300px'}} />
-      <p><strong>Released:</strong> {game.released}</p>
-      <p><strong>Rating:</strong> {game.rating}</p>
-      <p><strong>Platforms:</strong> {game.platforms && game.platforms.join(', ')}</p>
-      <p><strong>Genres:</strong> {game.genres && game.genres.join(', ')}</p>
-      
+    <div className="game-details">
+      <button
+        type="button"
+        onClick={() => navigate(-1)}
+        className="back-link"
+      >
+        ← Back
+      </button>
+      <div className="details-card">
+        <div className="hero">
+          {game.background_image ? (
+            <img src={game.background_image} alt={game.name} className="hero-img" />
+          ) : null}
+        </div>
+        <div className="details-body">
+          <h1 className="game-title">{game.name}</h1>
+          <div className="meta-row">
+            <span className="meta-item"><strong>Released:</strong> {game.released || '—'}</span>
+            <span className="meta-item"><strong>Rating:</strong> {typeof game.rating === 'number' && game.rating > 0 ? `${game.rating}/5` : 'No rating'}</span>
+            <span className="meta-item"><strong>ID:</strong> {game.id}</span>
+          </div>
+
+          {game.genres && game.genres.length > 0 && (
+            <div className="badges">
+              {game.genres.map(g => (
+                <span key={g} className="badge genre">{g}</span>
+              ))}
+            </div>
+          )}
+
+          {game.platforms && game.platforms.length > 0 && (
+            <div className="badges platforms">
+              {game.platforms.map(p => (
+                <span key={p} className="badge platform">{p}</span>
+              ))}
+            </div>
+          )}
+
+          <div className="description">
+            <h3>Full JSON</h3>
+            <details>
+              <summary>Show raw data</summary>
+              <pre className="raw-json">{JSON.stringify(game, null, 2)}</pre>
+            </details>
+          </div>
+
+          <Comments gameId={id} />
+        </div>
+      </div>
     </div>
   );
 }

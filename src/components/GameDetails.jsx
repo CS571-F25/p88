@@ -1,34 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Comments from './Comments';
 import './GameDetails.css';
+import ExternalLinks from './ExternalLinks';
 
 function GameDetails() {
   const { id } = useParams();
   const [game, setGame] = useState(null);
+  const { state } = useLocation();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-    fetch('/p88/assets/games.json')
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch games.json');
-        return res.json();
-      })
-      .then(data => {
-        const found = data.find(g => String(g.id) === String(id));
-        setGame(found);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [id]);
+    // If game data is passed from a Link, use it directly.
+    if (state && state.game) {
+      setGame(state.game);
+      setLoading(false);
+    } else {
+      // Otherwise, fetch the data as a fallback.
+      setLoading(true);
+      setError(null);
+      fetch('/p88/assets/games.json')
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to fetch games.json');
+          return res.json();
+        })
+        .then(data => {
+          const found = data.find(g => String(g.id) === String(id));
+          setGame(found);
+        })
+        .catch(err => setError(err.message))
+        .finally(() => setLoading(false));
+    }
+  }, [id, state]);
 
   if (loading) return <p className="gd-loading">Loading...</p>;
   if (error) return <p className="gd-error">Error: {error}</p>;
@@ -80,6 +86,8 @@ function GameDetails() {
               <pre className="raw-json">{JSON.stringify(game, null, 2)}</pre>
             </details>
           </div>
+
+          <ExternalLinks gameName={game.name} />
 
           <Comments gameId={id} />
         </div>

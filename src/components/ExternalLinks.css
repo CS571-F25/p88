@@ -1,0 +1,41 @@
+.external-links-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #343a40;
+    border-radius: 8px;
+    border: 1px solid #495057;
+}
+
+.external-links-container h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #f8f9fa;
+}
+
+.external-links-list {
+    display: flex;
+    gap: 1rem;
+}
+
+.external-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.wikipedia {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.ebay {
+    background-color: #e53238;
+    color: #ffffff;
+}
+
+.external-link:hover {
+    opacity: 0.9;
+}
